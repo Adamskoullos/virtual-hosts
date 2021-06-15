@@ -2,6 +2,27 @@
 
 Quick start guide to setting up an Apache virtual host environment to work with multiple applications via a single localHost server for development.
 
+# Overview of folder structure:
+
+To access the main apache2 directory - `/etc/apache2`:
+```js
+adam@Debian:/etc/apache2$ ls -la
+total 96
+drwxr-xr-x   8 root root  4096 Jun 14 15:44 .
+drwxr-xr-x 125 root root 12288 Jun 15 14:31 ..
+-rw-r--r--   1 root root  7223 Jun 14 15:44 apache2.conf
+drwxr-xr-x   2 root root  4096 Jun 14 10:59 conf-available
+drwxr-xr-x   2 root root  4096 Jun 14 10:59 conf-enabled
+-rw-r--r--   1 root root  1782 Aug  8  2020 envvars
+-rw-r--r--   1 root root 31063 Aug  8  2020 magic
+drwxr-xr-x   2 root root 12288 Jun 14 15:46 mods-available
+drwxr-xr-x   2 root root  4096 Jun 14 15:46 mods-enabled
+-rw-r--r--   1 root root   320 Aug  8  2020 ports.conf
+drwxr-xr-x   2 root root  4096 Jun 15 14:15 sites-available
+drwxr-xr-x   2 root root  4096 Jun 15 12:21 sites-enabled
+```
+From here we can access the main apache2 config file - `sudo nano apache2.conf`. 
+
 ## Prerequisites
 
 Install Apache2: `sudo apt-get update` > `sudo apt-get install apache2` 
@@ -115,8 +136,8 @@ Once altered save and close. Lets disect the virtual host file for the example:
 ```js
 <VirtualHost *:80>
     ServerAdmin admin@test1.local // Email for admin
-    ServerName test1.local // Incoming end-point
-    ServerAlias www.test1.local // further incoming end-points
+    ServerName test1.local // Incoming URL
+    ServerAlias www.test1.local // further incoming URLs
     DocumentRoot /var/www/test1.local/public_html // where the content is served from
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
